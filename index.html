@@ -634,6 +634,7 @@
             transition: all 0.3s ease;
             display: inline-block;
             margin: 0 0.25rem;
+            position: relative;
         }
 
         .progress-dot:hover {
@@ -650,6 +651,43 @@
             width: 24px;
             border-radius: 12px;
             transform: scale(1.1);
+        }
+
+        /* Tooltip for progress dots */
+        .progress-dot-tooltip {
+            position: absolute;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--codsec-dark);
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1100;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-dot-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--codsec-dark);
+        }
+
+        .progress-dot:hover .progress-dot-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: 160%;
         }
 
         #progressPercent {
@@ -2580,14 +2618,14 @@
         const visitedSlides = new Set();
 
         const slideLabels = [
-            'Hero', 'Situation', 'False Positives', 'IT Governance', 'Critical Systems',
-            'Goals & Metrics', 'Architecture', 'Workflow', 'Decision Logic', 'Enrichment',
-            'Case Studies & ROI', 'Failure Scenarios', 'Integration',
-            'Risk Management', 'Tier-1 Training', 'MSSP & 24/7', 'Reporting', 'Rollout',
-            'Discussion', 'Next Steps', 'Footer'
+            'Home', 'Current Situation', 'Managing False Positives', 'IT Governance', '2 AM Scenario',
+            'Goals & Success Metrics', 'System Architecture', 'Alert Workflow', 'Confidence Scoring', 'Auto-Enrichment',
+            'Case Studies & ROI', 'Failure Scenarios', 'Integration Guide',
+            'Risk Safeguards', 'SOC Training', 'MSSP Integration', 'Reporting & Compliance', 'Phased Rollout',
+            'Discussion Topics', 'Next Steps', 'Contact'
         ];
 
-        // Build bottom progress dots
+        // Build bottom progress dots with tooltips
         const dotsContainer = document.getElementById('progressDots');
         for (let i = 0; i < slideCount; i++) {
             const dot = document.createElement('div');
@@ -2597,7 +2635,13 @@
                 visitedSlides.add(0);
             }
             dot.onclick = () => scrollToSlide(i);
-            dot.title = slideLabels[i];
+            
+            // Add tooltip
+            const tooltip = document.createElement('span');
+            tooltip.className = 'progress-dot-tooltip';
+            tooltip.textContent = slideLabels[i];
+            dot.appendChild(tooltip);
+            
             dotsContainer.appendChild(dot);
         }
 

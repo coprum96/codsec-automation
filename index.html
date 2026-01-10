@@ -997,6 +997,97 @@
             margin-bottom: 0.8rem;
         }
 
+        /* CHATBOT FLOATING BUTTON */
+        .chatbot-float-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--codsec-accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 1045;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-float-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(255, 107, 53, 0.5);
+        }
+
+        .chatbot-float-btn i {
+            font-size: 1.8rem;
+        }
+
+        /* CHATBOT MODAL */
+        #chatbotModal .modal-dialog {
+            max-width: 800px;
+            height: 85vh;
+            margin: 3rem auto;
+        }
+
+        #chatbotModal .modal-content {
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: none;
+        }
+
+        #chatbotModal .modal-header {
+            background: linear-gradient(135deg, var(--codsec-primary) 0%, #002A66 100%);
+            color: white;
+            border-bottom: none;
+            padding: 1.25rem 1.5rem;
+            flex-shrink: 0;
+        }
+
+        #chatbotModal .modal-body {
+            padding: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        #chatbotModal iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            border: none;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 768px) {
+            .chatbot-float-btn {
+                bottom: 90px;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+            }
+
+            .chatbot-float-btn i {
+                font-size: 1.5rem;
+            }
+
+            #chatbotModal .modal-dialog {
+                max-width: 100%;
+                height: 100vh;
+                margin: 0;
+            }
+
+            #chatbotModal iframe {
+                min-height: calc(100vh - 70px);
+            }
+        }
+
         /* RACI TABLE */
         .raci-table {
             width: 100%;
@@ -2604,6 +2695,34 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING CHATBOT BUTTON -->
+    <button class="chatbot-float-btn" data-bs-toggle="modal" data-bs-target="#chatbotModal" title="Ask AI Assistant">
+        <i class="bi bi-chat-dots-fill"></i>
+    </button>
+
+    <!-- CHATBOT MODAL -->
+    <div class="modal fade" id="chatbotModal" tabindex="-1" aria-labelledby="chatbotModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chatbotModalLabel">
+                        <i class="bi bi-robot me-2"></i>CodSec AI Assistant
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe
+                        src="https://www.chatbase.co/chatbot-iframe/lbnZy69rRW7yhiDsbauLv"
+                        width="100%"
+                        height="100%"
+                        frameborder="0"
+                        allow="microphone"
+                    ></iframe>
                 </div>
             </div>
         </div>
